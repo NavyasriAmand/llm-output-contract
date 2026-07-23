@@ -11,3 +11,4 @@ dist/
 *.db
 *.sqlite
 .env
+bench/corpus.jsonl
