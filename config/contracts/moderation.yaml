@@ -1,0 +1,48 @@
+# Contract pack for a content-moderation decision produced by an LLM.
+# The prompt instructs the model to emit exactly this JSON. In practice a
+# fraction of responses arrive wrapped in prose, fenced in markdown, or with
+# minor syntax defects. This contract is what the engine validates against
+# and repairs toward.
+name: moderation
+version: 1
+description: Moderation verdict with a bounded label set and confidence.
+schema:
+  type: object
+  additionalProperties: false
+  required: [label, confidence, reasons]
+  properties:
+    label:
+      type: string
+      enum: [allow, review, block]
+    confidence:
+      type: number
+      minimum: 0.0
+      maximum: 1.0
+    reasons:
+      type: array
+      items:
+        type: string
+      minItems: 0
+      maxItems: 5
+    category:
+      type: string
+      enum: [spam, harassment, self_harm, violence, sexual, none]
+# Defaults are applied only for optional fields that are absent after
+# extraction. Required fields are never fabricated; a missing required field
+# is a repair failure, not a silent fill.
+defaults:
+  category: none
+# Enum coercion: near-miss strings are snapped to the closest allowed value
+# when the edit distance is small. This handles casing and obvious synonyms
+# without guessing.
+enum_coercions:
+  label:
+    allowed: [allow, review, block]
+    aliases:
+      allowed: allow
+      ok: allow
+      pass: allow
+      flag: review
+      escalate: review
+      blocked: block
+      deny: block

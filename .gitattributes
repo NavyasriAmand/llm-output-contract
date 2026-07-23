@@ -1,0 +1,8 @@
+# Make authored config and SQL surfaces count toward the language bar.
+# Without this, GitHub linguist marks YAML and SQL as generated/vendored
+# and the repo shows as 100% Python, hiding real language diversity.
+*.sql linguist-detectable=true
+*.yaml linguist-detectable=true
+*.yml linguist-detectable=true
+config/** linguist-detectable=true
+sql/** linguist-detectable=true

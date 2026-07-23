@@ -1,0 +1,34 @@
+# Contract pack for an intelligent-tagging response. The model returns a set
+# of topical tags plus a short summary. Free-form tags make this a good stress
+# test for the extractor because model prose often bleeds into the JSON.
+name: tagging
+version: 1
+description: Topical tags plus a one-line summary for a piece of content.
+schema:
+  type: object
+  additionalProperties: false
+  required: [tags, summary]
+  properties:
+    tags:
+      type: array
+      items:
+        type: string
+      minItems: 1
+      maxItems: 10
+    summary:
+      type: string
+      minLength: 1
+      maxLength: 280
+    language:
+      type: string
+      enum: [en, es, fr, de, other]
+defaults:
+  language: en
+enum_coercions:
+  language:
+    allowed: [en, es, fr, de, other]
+    aliases:
+      english: en
+      spanish: es
+      french: fr
+      german: de
