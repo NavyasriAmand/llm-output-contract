@@ -2,7 +2,7 @@
 
 **Deterministic JSON-contract validator and repair layer for LLM outputs that recovers 100% of honestly-fixable malformed GPT-4/Llama responses with zero extra model calls, at ~12,300 outputs/sec.**
 
-![build](https://img.shields.io/badge/ci-passing-brightgreen)
+[![ci](https://github.com/NavyasriAmand/llm-output-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/NavyasriAmand/llm-output-contract/actions/workflows/ci.yml)
 ![coverage](https://img.shields.io/badge/coverage-92%25-brightgreen)
 ![python](https://img.shields.io/badge/python-3.12-blue)
 ![license](https://img.shields.io/badge/license-MIT-blue)
@@ -49,16 +49,16 @@ and the numbers table below; every figure comes from a run committed to
 flowchart LR
     A[Raw model output] --> B[Extract]
     B -->|strip fence, isolate object| C[String repairs]
-    C -->|trailing comma, quotes,\nliterals, truncation| D{Parses?}
+    C -->|trailing comma, quotes,<br/>literals, truncation| D{Parses?}
     D -->|no| F[Report failure + store raw]
     D -->|yes| E[Object coercion]
-    E -->|types, enum alias,\noptional defaults| G{Schema valid?}
+    E -->|types, enum alias,<br/>optional defaults| G{Schema valid?}
     G -->|no| F
     G -->|yes| H[Validated object]
     H --> I[(Audit log)]
     F --> I
-    subgraph Contract pack (YAML)
-      S[JSON Schema + coercion rules]
+    subgraph pack["Contract pack (YAML)"]
+      S[JSON Schema plus coercion rules]
     end
     S -.governs.-> E
     S -.governs.-> G
