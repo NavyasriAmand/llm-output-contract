@@ -1,0 +1,40 @@
+{
+  "corpus_size": 5000,
+  "already_valid": 1297,
+  "initially_invalid": 3703,
+  "repaired": 2911,
+  "repair_rate": 0.7861,
+  "recoverable_invalid": 3250,
+  "recoverable_repair_rate": 0.8957,
+  "elapsed_seconds": 0.3933,
+  "throughput_per_sec": 12713.4,
+  "reprompts_avoided": 2911,
+  "assumptions": {
+    "reprompt_tokens": 900.0,
+    "price_per_1k_tokens": 0.005,
+    "reprompt_cost_usd_each": 0.0045
+  },
+  "cost_avoided_usd": 13.0995,
+  "by_defect": {
+    "preamble": 533,
+    "single_quotes": 445,
+    "truncate": 392,
+    "fence": 826,
+    "trailing_comma": 458,
+    "str_number": 347,
+    "clean": 887,
+    "drop_required": 271,
+    "enum_alias": 372,
+    "out_of_range": 182,
+    "py_literals": 287
+  },
+  "by_defect_fixed": {
+    "preamble": 533,
+    "single_quotes": 445,
+    "fence": 826,
+    "trailing_comma": 335,
+    "str_number": 347,
+    "truncate": 53,
+    "enum_alias": 372
+  }
+}
